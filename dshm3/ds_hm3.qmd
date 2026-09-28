@@ -1,0 +1,66 @@
+---
+title: "Do Smaller Classes Have Higher Test Scores?"
+format: pdf
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(AER)
+library(knitr)
+data("CASchools")
+CASchools$stratio <- CASchools$students / CASchools$teachers
+CASchools$score <- (CASchools$math + CASchools$read) / 2
+```
+
+Can the data show whether California school districts with fewer students per teacher tend to have higher average test scores? The `CASchools` data describe 420 California districts. The scores are district averages on the Stanford 9 test for fifth-grade students, and the student-teacher ratio is calculated from district enrollment and teacher counts [@caschools].
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: "Summary of test scores and student-teacher ratios"
+
+kable(
+  data.frame(
+    Measure = c("Average test score (points)", "Students per teacher (students/teacher)"),
+    Mean = c(mean(CASchools$score), mean(CASchools$stratio)),
+    SD = c(sd(CASchools$score), sd(CASchools$stratio))
+  ),
+  digits = 2
+)
+```
+
+```{r}
+#| label: fig-scores
+#| fig-cap: "Average test score by district"
+#| fig-alt: "Histogram of district average test scores."
+#| fig-width: 6
+#| fig-height: 4
+
+hist(CASchools$score,
+     xlab = "Average test score (points)",
+     ylab = "Number of districts",
+     main = "")
+```
+
+```{r}
+#| label: fig-ratio
+#| fig-cap: "Student-teacher ratio and average test score"
+#| fig-alt: "Scatterplot of students per teacher against average test scores."
+#| fig-width: 6
+#| fig-height: 4
+
+plot(CASchools$stratio, CASchools$score,
+     xlab = "Students per teacher (students/teacher)",
+     ylab = "Average test score (points)",
+     pch = 19, col = "#356A8A")
+```
+
+Figure @fig-ratio compares the two measures across districts. The plot can reveal whether higher student-teacher ratios tend to occur alongside higher or lower average scores. The histogram in Figure @fig-scores shows how test scores are distributed across districts. These are district-level patterns: a district with a higher average score does not imply that every student in it scored higher.
+
+The table summarizes the average and spread of both measures. The student-teacher ratio is a district measure, so it does not describe the class size experienced by each individual student. Likewise, test scores are averages for districts, not individual records. The data cover 420 California districts with information available for 1998 and 1999 [@caschools]. They offer a useful snapshot for exploring associations between school resources and achievement.
+
+The figures and summary table are descriptive. They help show what is present in the data and whether the variables move together. They do not by themselves establish why districts differ. Other characteristics, such as student background and district income, may also be related to scores and staffing. The results should therefore be read as patterns in this particular dataset, rather than as proof that changing the number of students per teacher would cause scores to change.
+
+## References

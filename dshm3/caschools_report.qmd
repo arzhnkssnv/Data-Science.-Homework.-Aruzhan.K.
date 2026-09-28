@@ -1,0 +1,15 @@
+@Manual{caschools,
+  title = {CASchools: California Test Score Data},
+  author = {{AER package}},
+  year = {2026},
+  url = {https://search.r-project.org/CRAN/refmans/AER/html/CASchools.html},
+  note = {Dataset documentation, accessed 2026-09-28}
+}
+
+@Manual{aer,
+  title = {AER: Applied Econometrics with R},
+  author = {Kleiber, Christian and Zeileis, Achim},
+  year = {2026},
+  url = {https://CRAN.R-project.org/package=AER},
+  note = {R package documentation, accessed 2026-09-28}
+}
